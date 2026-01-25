@@ -2,6 +2,14 @@ package Model;
 
 public class Card {
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     //private String type;
     public enum types {
         SPADES,
@@ -12,11 +20,13 @@ public class Card {
     private types type;
     private int number;
     private int value;
+    private String name;
     private boolean isVisible;
     private boolean isUsed;
 
-    public Card(types type, int number, int value, boolean isVisible, boolean isUsed){
+    public Card(types type, String name, int number, int value, boolean isVisible, boolean isUsed){
         this.type = type;
+        this.name = name;
         this.number = number;
         this.value = value;
         this.isVisible = isVisible;
