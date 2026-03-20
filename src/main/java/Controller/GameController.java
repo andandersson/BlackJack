@@ -1,17 +1,30 @@
 package Controller;
 
 import Model.Card;
-import Model.CardFactory;
 import View.UserInput;
-import java.util.List;
+import java.util.Stack;
+
 import static Model.CardFactory.createPackOfCards;
 
 public class GameController {
+
+    private Stack<Card> packOfCards;
+    private GamePlay gamePlay;
+    private UserInput userInput;
     public GameController() {
 
-        List<Card> packOfCards = createPackOfCards();
-        GamePlay gamePlay = new GamePlay(packOfCards);
-        UserInput userInput = new UserInput();
+        this.packOfCards = createPackOfCards();
+        this.gamePlay = new GamePlay(packOfCards);
+        this.userInput = new UserInput();
+        this.playGame();
+
+    }
+
+    public void playGame() {
+        while (this.packOfCards.size() >= 26) {
+            Card playerCard = this.gamePlay.dealCardToPlayer();
+            this.userInput.getUserInputToContinueOrResumeDeal(playerCard);
+        }
     }
 
 }

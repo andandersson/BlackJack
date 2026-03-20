@@ -1,12 +1,12 @@
 package Model;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Stack;
 
 public class CardFactory {
 
-    public static List<Card> createPackOfCards(){
-        List<Card> packOfCards = new ArrayList<>();
+    public static Stack<Card> createPackOfCards(){
+        Stack<Card> packOfCards = new Stack<>();
 
         Card SpadesAce = new Card(Card.types.SPADES, "SpadesAce", 1, 1, false, false );
         Card Spades2 = new Card(Card.types.SPADES, "Spades2", 2, 2, false, false );
