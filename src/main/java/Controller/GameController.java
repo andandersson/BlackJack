@@ -2,6 +2,9 @@ package Controller;
 
 import Model.Card;
 import View.UserInput;
+
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 import static Model.CardFactory.createPackOfCards;
@@ -14,17 +17,8 @@ public class GameController {
     public GameController() {
 
         this.packOfCards = createPackOfCards();
-        this.gamePlay = new GamePlay(packOfCards);
         this.userInput = new UserInput();
-        this.playGame();
-
-    }
-
-    public void playGame() {
-        while (this.packOfCards.size() >= 26) {
-            Card playerCard = this.gamePlay.dealCardToPlayer();
-            this.userInput.getUserInputToContinueOrResumeDeal(playerCard);
-        }
+        this.gamePlay = new GamePlay(packOfCards, userInput);
     }
 
 }
