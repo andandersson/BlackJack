@@ -35,8 +35,33 @@ public class GamePlay {
         int sum = 0;
         for(int i = 0; i<cards.size(); i ++){
             sum = sum + cards.get(i).getValue();
+            System.out.println("Player has got: "+cards.get(i).getName());
         }
+        if (sum == 21 ){
+            System.out.println("Player got blackJack!, player wins this round!");
+        }
+        if (sum > 21 ){
+            System.out.println("Player got more than 21, the dealer wins this round!");
+        }
+        System.out.println("total sum is: "+ sum);
         return sum;
+    }
+
+    public int checkDealerCardSum(int cardOne, int cardTwo) {
+        return cardOne + cardTwo;
+    }
+
+    public void compare(int playerCardSum, int dealerCardSum) {
+        if( playerCardSum > dealerCardSum) {
+            System.out.println("Player wins this round!");
+        }
+        else if (playerCardSum < dealerCardSum) {
+            System.out.println("Dealer wins this round!");
+        }
+        else {
+            System.out.println("Both dealer and player has 21, even!");
+        }
+
     }
 
 
@@ -49,29 +74,37 @@ public class GamePlay {
             Card dealerFaceDownCard = this.dealFaceDownCard();
             Card playerFirstCard = this.dealFaceUpCard();
             Card playerSecondCard = this.dealFaceUpCard();
+            int playerCardSum;
             playerCardList.add(playerFirstCard);
             playerCardList.add(playerSecondCard);
             dealerFaceDownCard.setVisible(true);
             System.out.println("Player got " + playerFirstCard.getName() + " and "+ playerSecondCard.getName());
             System.out.println("Dealer got " + dealerFaceUpCard.getName()+ " on visible card");
 
-            if (this.checkCardSum(playerCardList) == 21 ){
-                System.out.println("Player got blackJack!, player wins this round!");
-            }
-            if (this.checkCardSum(playerCardList) > 21 ){
-                System.out.println("Player got more than 21, the dealer wins this round!");
-            }
-
-            else {
-                while (true) {
-                    int continueOrResume = this.userInput.getUserInputToContinueOrResume(playerFirstCard);
-                    if (continueOrResume == 1) {
-                        Card nextPlayerCard = this.dealFaceUpCard();
-                        playerCardList.add(nextPlayerCard);
-                    }
+            while (true) {
+                int continueOrResume = this.userInput.getUserInputToContinueOrResume(playerFirstCard);
+                if (continueOrResume == 1) {
+                    Card nextPlayerCard = this.dealFaceUpCard();
+                    playerCardList.add(nextPlayerCard);
+                }
+                else {
+                    break;
+                }
+                playerCardSum = this.checkCardSum(playerCardList);
+                if ( playerCardSum >= 21 ) {
+                    break;
                 }
             }
+            this.dealFaceDownCard().setVisible(true);
+            System.out.println("dealers reveals hidden card: "+this.dealFaceDownCard().getName());
+
+            this.checkDealerCardSum(this.dealFaceUpCard().getNumber(), this.dealFaceDownCard().getNumber());
+
+
+            System.out.println("----------------------------------------------------------------");
+
         }
     }
-
 }
+
+
