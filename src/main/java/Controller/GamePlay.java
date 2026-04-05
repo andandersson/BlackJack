@@ -97,13 +97,15 @@ public class GamePlay {
             }
             this.dealFaceDownCard().setVisible(true);
             System.out.println("dealers reveals hidden card: "+this.dealFaceDownCard().getName());
+            System.out.println("The dealer has got: "+this.dealFaceUpCard() + this.dealFaceDownCard());
 
             this.checkDealerCardSum(this.dealFaceUpCard().getNumber(), this.dealFaceDownCard().getNumber());
 
-
+            System.out.println("Cards left: " + this.packOfCards.size());
             System.out.println("----------------------------------------------------------------");
 
         }
+        System.out.println("Less than 26 cards left, thank you for playing!");
     }
 }
 
